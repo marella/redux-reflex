@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Compiled output
+build
+cjs
+dist
+es
+
+# Test coverage
+coverage
+.nyc_output
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log
+
+# Editors and IDEs
+.idea/
+.vscode/
+
+# Misc
+.DS_Store
