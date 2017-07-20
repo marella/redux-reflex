@@ -8,7 +8,8 @@
     "clean": "rimraf cjs es",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir cjs",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build": "npm run clean && npm run build:cjs && npm run build:es"
+    "build": "npm run clean && npm run build:cjs && npm run build:es",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.3.15",
