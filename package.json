@@ -1,6 +1,6 @@
 {
   "name": "redux-reflex",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Reduce boilerplate code by automatically creating action creators and action types from reducers.",
   "main": "cjs/index.js",
   "module": "es/index.js",
