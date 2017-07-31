@@ -5,9 +5,12 @@
   "main": "cjs/index.js",
   "module": "es/index.js",
   "scripts": {
-    "clean": "rimraf cjs es",
-    "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir cjs",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "clean": "rimraf cjs es coverage",
+    "test": "npm run clean && jest",
+    "start": "npm test -- --watchAll",
+    "coverage": "npm test -- --coverage",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir cjs --ignore *.test.js",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore *.test.js",
     "build": "npm run clean && npm run build:cjs && npm run build:es",
     "prepublish": "npm run build"
   },
@@ -17,7 +20,13 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.3.13",
     "cross-env": "^5.0.1",
+    "jest": "^20.0.4",
     "rimraf": "^2.3.4"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
   },
   "author": "Ravindra Marella",
   "license": "MIT",
