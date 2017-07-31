@@ -1,4 +1,4 @@
-# redux-reflex
+# redux-reflex [![Build Status](https://travis-ci.org/marella/redux-reflex.svg?branch=master)](https://travis-ci.org/marella/redux-reflex) [![Coverage Status](https://coveralls.io/repos/github/marella/redux-reflex/badge.svg)](https://coveralls.io/github/marella/redux-reflex)
 
 Reduce boilerplate code by automatically creating action creators and action types from reducers.
 
