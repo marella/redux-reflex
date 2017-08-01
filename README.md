@@ -27,49 +27,42 @@ npm install redux-reflex --save
 
 ## Example
 
-*state.js*
+*reducer.js*
 
 ```js
 import Reducer from 'redux-reflex'
 
-const counter = Reducer(
-  'counter', // prefix for action types
-  { count: 0 }, // initial state
-  // case reducers
-  {
-    // this function will be called when action type is 'counter/increment'
-    increment(state, amount) {
-      return { ...state, count: state.count + amount }
-    },
-    // this function will be called when action type is 'counter/decrement'
-    decrement(state, amount) {
-      return { ...state, count: state.count - amount }
-    },
-  }
-)
+const prefix = 'counter'
+const initialState = { count: 0 }
+const handlers = {
+  // called when action type is 'counter/increment'
+  increment(state, amount) {
+    return { ...state, count: state.count + amount }
+  },
+  // called when action type is 'counter/decrement'
+  decrement(state, amount) {
+    return { ...state, count: state.count - amount }
+  },
+}
 
-export default counter // reducer function
+const counter = Reducer(prefix, initialState, handlers)
+
+export default counter
 ```
 
-*store.js*
+This will create a reducer function `counter` with `initialState` as the initial state and `handlers` as case reducers. `handlers` handle actions with type starting with `prefix`.
+
+You don't have to define action creators or action types. They are automatically created and attached to the reducer function:
 
 ```js
-import { combineReducers, createStore } from 'redux'
-import counter from './state'
+counter.increment // action creator (function)
 
-// counter is a reducer function
-const store = createStore(combineReducers({ counter }))
+counter.increment.type // action type (string)
 
-// counter methods are action creators
-store.dispatch(counter.increment(5)) // increase count by 5
-store.dispatch(counter.decrement(2)) // decrease count by 2
+counter.increment() // creates action (object) with type 'counter/increment'
 
-// counter methods provide action types
-counter.increment.type // 'counter/increment'
-counter.decrement.type // 'counter/decrement'
+dispatch(counter.increment(5)) // increases count by 5
 ```
-
-Basically you only have to write reducer functions. Action creators and types are automatically created and attached to the reducer function.
 
 
 ## Documentation
