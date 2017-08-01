@@ -57,9 +57,9 @@ You don't have to define action creators or action types. They are automatically
 ```js
 counter.increment // action creator (function)
 
-counter.increment.type // action type (string)
+counter.increment.type // action type (string) - 'counter/increment'
 
-counter.increment() // creates action (object) with type 'counter/increment'
+counter.increment() // creates action (object) - { type: 'counter/increment' }
 
 dispatch(counter.increment(5)) // increases count by 5
 ```
@@ -278,7 +278,7 @@ todos.fetch = () => dispatch => {
 }
 
 // dispatch it like a normal action
-store.dispatch(todos.fetch())
+dispatch(todos.fetch())
 ```
 
 ### Reusing Reducer Logic
