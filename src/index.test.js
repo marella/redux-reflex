@@ -20,15 +20,23 @@ describe('Action', () => {
     expect(a(payload)).toEqual({ type, payload, error: true })
   })
 
-  it('should transform payload', () => {
+  it('should transform payload and args', () => {
     const transform = jest.fn()
     const a = Action(type, transform)
     const payload = 'bar'
+    const args = ['lorem', 'ipsum']
     const value = 'baz'
+
     transform.mockReturnValueOnce(value)
     expect(a(payload)).toEqual({ type, payload: value })
     expect(transform.mock.calls.length).toBe(1)
     expect(transform.mock.calls[0][0]).toBe(payload)
+
+    transform.mockReturnValueOnce(value)
+    expect(a(payload, ...args)).toEqual({ type, payload: value })
+    expect(transform.mock.calls.length).toBe(2)
+    expect(transform.mock.calls[1][0]).toBe(payload)
+    expect(transform.mock.calls[1]).toEqual([payload, ...args])
   })
 })
 
@@ -49,8 +57,10 @@ describe('transform', () => {
 
   it('should call creator and transformer', () => {
     const payload = 'bar'
+    const args = ['lorem', 'ipsum']
     const value = 'baz'
     const action = 'foobaz'
+
     transformer.mockReturnValueOnce(value)
     creator.mockReturnValueOnce(action)
     expect(transformed(payload)).toEqual(action)
@@ -58,6 +68,15 @@ describe('transform', () => {
     expect(creator.mock.calls[0][0]).toBe(value)
     expect(transformer.mock.calls.length).toBe(1)
     expect(transformer.mock.calls[0][0]).toBe(payload)
+
+    transformer.mockReturnValueOnce(value)
+    creator.mockReturnValueOnce(action)
+    expect(transformed(payload, ...args)).toEqual(action)
+    expect(creator.mock.calls.length).toBe(2)
+    expect(creator.mock.calls[1][0]).toBe(value)
+    expect(transformer.mock.calls.length).toBe(2)
+    expect(transformer.mock.calls[1][0]).toBe(payload)
+    expect(transformer.mock.calls[1]).toEqual([payload, ...args])
   })
 })
 
