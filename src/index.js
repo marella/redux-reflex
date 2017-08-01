@@ -1,6 +1,6 @@
 export function Action(type, transform = p => p) {
-  function creator(payload) {
-    payload = transform(payload)
+  function creator(...args) {
+    const payload = transform(...args)
     const action = { type }
     if (payload !== undefined) {
       action.payload = payload
@@ -16,7 +16,7 @@ export function Action(type, transform = p => p) {
 
 export function transform(creator, transform) {
   const { type } = creator
-  const transformed = (payload, ...args) => creator(transform(payload), ...args)
+  const transformed = (...args) => creator(transform(...args))
   if (type !== undefined) {
     transformed.type = type
   }
