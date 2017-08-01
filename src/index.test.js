@@ -95,8 +95,13 @@ describe('Reducer', () => {
 
   it('should have action creator', () => {
     const reducer = createReducer(() => {})
+    const payload = 'bar'
+    const args = ['lorem', 'ipsum']
     expect(typeof reducer.handler).toBe('function')
     expect(reducer.handler.type).toBe(type)
+    expect(reducer.handler()).toEqual({ type })
+    expect(reducer.handler(payload)).toEqual({ type, payload })
+    expect(reducer.handler(payload, ...args)).toEqual({ type, payload })
   })
 
   it('should call handler with payload and action', () => {
