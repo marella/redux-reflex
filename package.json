@@ -13,7 +13,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir cjs --ignore *.test.js",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore *.test.js",
     "build": "npm run clean && npm run build:cjs && npm run build:es",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm test && npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
